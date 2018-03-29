@@ -1,10 +1,17 @@
-# In order to get it working install html-xml-utils and w3m
-# Add path to ./bashrc file in order to enjoy this while 
-# getting terminal up.
+#!/bin/bash
 
+# kalicieckid
+# Do prawidłowego działania skryptu musimy zainstalować narzędzia html-xml-utils oraz w3m.
+# Aby skrypt uruchamiał się przy starcie terminalu, dodaj ścieżkę w pliku ./bashrc.
 
-echo "Oto Twoja dzienna dawka humoru:"
+#Sprawdzenie, czy mamy połączenie z internetem.
+if  ping -q -c 1 -W 1 8.8.8.8 > /dev/null 
+	then
+		echo "Oto Twoja dzienna dawka humoru:"
+		
+		curl -s -L bash.org.pl/random > content.html #Pobranie zawartości strony z losowym cytatem.
 
-curl -s -L bash.org.pl/random > content.html
-
-cat content.html | hxnormalize -x | hxselect '.post-body' | w3m -dump -cols 2000 -T 'text/html'
+		cat content.html | hxnormalize -x | hxselect '.post-body' | w3m -dump -cols 2000 -T 'text/html' #Wycięcie samego cytatu.
+		else 
+		echo "Błąd sieci!"
+fi
