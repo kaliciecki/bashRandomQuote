@@ -9,9 +9,9 @@ if  ping -q -c 1 -W 1 8.8.8.8 > /dev/null
 	then
 		echo "Oto Twoja dzienna dawka humoru:"
 		
-		curl -s -L bash.org.pl/random > content.html #Pobranie zawartości strony z losowym cytatem.
+		curl -s -L bash.org.pl/random > /home/$USER/content.html #Pobranie zawartości strony z losowym cytatem.
 
-		cat content.html | hxnormalize -x | hxselect '.post-body' | w3m -dump -cols 2000 -T 'text/html' #Wycięcie samego cytatu.
+		cat /home/$USER/content.html | hxnormalize -x | hxselect '.post-body' | w3m -dump -cols 2000 -T 'text/html' #Wycięcie samego cytatu.
 		else 
 		echo "Błąd sieci!"
 fi
